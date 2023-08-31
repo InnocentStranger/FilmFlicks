@@ -6,9 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
-import com.example.movietmdb.data.model.content.DiscoverContent
 import com.example.movietmdb.domain.Repository
-import retrofit2.Response
 
 class HomeViewModel(private val repository: Repository) : ViewModel() {
     private val allMutableLiveData = MutableLiveData<String>("")
@@ -18,6 +16,10 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
     private val contentIdMutableLiveData = MutableLiveData<Int>(0)
     val contentIdLiveData : LiveData<Int>
         get() = contentIdMutableLiveData
+
+    private val peopleMutableLiveData = MutableLiveData<Int>(0)
+    val peopleLiveData : LiveData<Int>
+        get() = peopleMutableLiveData
 
     fun getPopularMoviesFirstPage() = liveData{
         emit(repository.getContentFirstPage("popular_movies",null))
@@ -39,6 +41,10 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
     fun updateContentId(id : Int) {
         contentIdMutableLiveData.value = id
     }
+
+    fun updatePeopleId(id : Int) {
+        peopleMutableLiveData.value = id
+    }
     fun getTopRatedMoviesPaging(type : String) = repository.getMoviesPaging(type,null).cachedIn(viewModelScope)
     fun getNowPlayingMoviesPaging(type : String) = repository.getMoviesPaging(type,null).cachedIn(viewModelScope)
     fun getUpcomingMoviesPaging(type : String) = repository.getMoviesPaging(type,null).cachedIn(viewModelScope)
@@ -59,4 +65,31 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
         emit(repository.getContentFirstPage("recommended_movies",id))
     }
 
+    fun getSimilarMoviePaging(type : String,id : Int?) = repository.getMoviesPaging(type,id).cachedIn(viewModelScope)
+    fun getRecommendedMoviePaging(type : String, id : Int?) = repository.getMoviesPaging(type,id).cachedIn(viewModelScope)
+
+    fun getSimilarTvSeriesPaging(type : String, id: Int?) = repository.getTvSeriesPaging(type,id).cachedIn(viewModelScope)
+    fun getRecommendedTvSeriesPaging(type : String, id: Int?) = repository.getTvSeriesPaging(type,id).cachedIn(viewModelScope)
+    fun getPeopleDetails(id : Int) = liveData {
+        emit(repository.getPeopleDetails(id))
+    }
+    fun getPeopleMovies(id : Int) = liveData {
+        emit(repository.getPeopleMovies(id))
+    }
+
+    fun getPeopleTvSeries(id : Int) = liveData {
+        emit(repository.getPeopleTvSeries(id))
+    }
+
+    fun getPopularTvSeriesPaging(type : String, id : Int?) = repository
+        .getTvSeriesPaging(type,id).cachedIn(viewModelScope)
+
+    fun getTopRatedTvSeriesPaging(type : String,id : Int?) = repository
+        .getTvSeriesPaging(type,id).cachedIn(viewModelScope)
+
+    fun getOnTheAirTvSeriesPaging(type : String,id : Int?) = repository
+        .getTvSeriesPaging(type,id).cachedIn(viewModelScope)
+
+    fun getAiringTodayTvSeiresPaging(type : String,id : Int?) = repository
+        .getTvSeriesPaging(type,id).cachedIn(viewModelScope)
 }

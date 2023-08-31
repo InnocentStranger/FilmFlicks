@@ -10,7 +10,7 @@ import com.example.movietmdb.data.model.content.Content
 import com.example.movietmdb.data.model.people.People
 import com.example.movietmdb.databinding.SingleListItem1Binding
 
-class PeopleAdapterType1 : RecyclerView.Adapter<PeopleViewHolder>() {
+class PeopleAdapterType1(private val onClick : (id : Int) -> Unit) : RecyclerView.Adapter<PeopleViewHolder>() {
     private var data = ArrayList<People>()
     fun updateData(data : List<People>) {
         this.data.clear()
@@ -28,7 +28,7 @@ class PeopleAdapterType1 : RecyclerView.Adapter<PeopleViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: PeopleViewHolder, position: Int) {
-        holder.bind(data[position])
+        holder.bind(data[position],onClick)
     }
 
     override fun getItemCount(): Int {
@@ -37,11 +37,15 @@ class PeopleAdapterType1 : RecyclerView.Adapter<PeopleViewHolder>() {
 }
 class PeopleViewHolder(private val binding : SingleListItem1Binding)
     : RecyclerView.ViewHolder(binding.root){
-    fun bind(people : People) {
+    fun bind(people : People,onClick: (id: Int) -> Unit) {
         binding.title.text = people.name
         val uri = "https://image.tmdb.org/t/p/w500/" + people.profilePath
         Glide.with(binding.image.context)
             .load(uri)
             .into(binding.image)
+
+        binding.cardView.setOnClickListener {
+            onClick(people.id)
+        }
     }
 }

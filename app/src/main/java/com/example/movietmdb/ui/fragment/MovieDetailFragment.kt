@@ -1,11 +1,11 @@
 package com.example.movietmdb.ui.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -13,11 +13,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.movietmdb.R
 import com.example.movietmdb.databinding.FragmentMovieDetailBinding
+import com.example.movietmdb.ui.adapter.ContentAdapterType1
 import com.example.movietmdb.ui.adapter.ContentAdapterType2
 import com.example.movietmdb.ui.adapter.GenreAdapterTypeBox
 import com.example.movietmdb.ui.adapter.PeopleAdapterType1
 import com.example.movietmdb.ui.viewmodel.HomeViewModel
-import okhttp3.internal.notify
 
 class MovieDetailFragment : Fragment() {
     private lateinit var binding : FragmentMovieDetailBinding
@@ -25,6 +25,7 @@ class MovieDetailFragment : Fragment() {
     private lateinit var castAdapter : PeopleAdapterType1
     private lateinit var similarContentAdapter : ContentAdapterType2
     private lateinit var recommendedContentAdapter : ContentAdapterType2
+
     private val viewModel : HomeViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,17 +41,42 @@ class MovieDetailFragment : Fragment() {
         val movieId = viewModel.contentIdLiveData.value
         initRv()
         if(movieId != null) getData(movieId)
+        binding.backBtn.setOnClickListener {
+            findNavController().popBackStack()
+        }
+        if(movieId != null) allClick(movieId)
+    }
+    private fun allClick(movieId: Int) {
+        binding.allCast.setOnClickListener {
+            viewModel.updateAllType("movie_cast")
+            viewModel.updateContentId(movieId)
+            findNavController().navigate(R.id.action_movieDetailFragment_to_seeAllFragment)
+        }
+        binding.similarAll.setOnClickListener {
+            viewModel.updateAllType("similar_movies")
+            viewModel.updateContentId(movieId)
+            findNavController().navigate(R.id.action_movieDetailFragment_to_seeAllFragment)
+        }
+        binding.recommendedAll.setOnClickListener {
+            viewModel.updateAllType("recommended_movies")
+            viewModel.updateContentId(movieId)
+            findNavController().navigate(R.id.action_movieDetailFragment_to_seeAllFragment)
+        }
     }
     private fun onClickContent(id : Int) {
         viewModel.updateContentId(id)
         findNavController().navigate(R.id.action_movieDetailFragment_self)
+    }
+    private fun onClickPeople(id : Int) {
+        viewModel.updatePeopleId(id)
+        findNavController().navigate(R.id.action_movieDetailFragment_to_peopleDetailFragment)
     }
     private fun initRv() {
         genreAdapter = GenreAdapterTypeBox()
         binding.genreRv.adapter = genreAdapter
         binding.genreRv.layoutManager = LinearLayoutManager(binding.root.context,LinearLayoutManager.HORIZONTAL,false)
 
-        castAdapter = PeopleAdapterType1()
+        castAdapter = PeopleAdapterType1(::onClickPeople)
         binding.castRv.adapter = castAdapter
         binding.castRv.layoutManager = LinearLayoutManager(binding.root.context,LinearLayoutManager.HORIZONTAL,false)
 

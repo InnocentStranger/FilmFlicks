@@ -7,11 +7,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.example.movietmdb.R
 import com.example.movietmdb.databinding.ActivityMainBinding
 import com.example.movietmdb.domain.Repository
 import com.example.movietmdb.ui.di.Injector
 import com.example.movietmdb.ui.fragment.MoviesFragment
+import com.example.movietmdb.ui.fragment.TvSeriesFragment
 import com.example.movietmdb.ui.viewmodel.HomeViewModel
 import com.example.movietmdb.ui.viewmodel.HomeViewModelFactory
 import javax.inject.Inject
@@ -34,7 +36,16 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.movieNavBtn -> {
-                    if(currId != it.itemId) {replaceFragment(MoviesFragment())}
+                    try {
+                        if(currId != it.itemId) {replaceFragment(MoviesFragment())}
+                        currId = it.itemId
+                    }catch (e : Exception) {
+                        Log.i("MyTag",e.toString())
+                    }
+
+                }
+                R.id.tvSeriesNavBtn -> {
+                    if(currId != it.itemId) {replaceFragment(TvSeriesFragment())}
                     currId = it.itemId
                 }
             }

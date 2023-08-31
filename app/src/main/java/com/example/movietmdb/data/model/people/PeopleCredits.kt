@@ -7,6 +7,8 @@ import com.google.gson.annotations.SerializedName
 data class PeopleCredits(
     @SerializedName("cast")
     val cast: List<Content>,
+    @SerializedName("crew")
+    val crew: List<Content>,
     @SerializedName("id")
     val id: Int
 )

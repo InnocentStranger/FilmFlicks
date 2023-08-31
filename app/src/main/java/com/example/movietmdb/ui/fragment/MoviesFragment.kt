@@ -58,8 +58,12 @@ class MoviesFragment() : Fragment() {
     }
 
     private fun onClickContent(id : Int) {
-        viewModel.updateContentId(id)
-        findNavController().navigate(R.id.action_moviesFragment_to_movieDetailFragment)
+        try {
+            viewModel.updateContentId(id)
+            findNavController().navigate(R.id.action_moviesFragment_to_movieDetailFragment)
+        }catch (e : Exception) {
+            Log.i("MyTag",e.toString())
+        }
     }
 
     private fun initRv() {

@@ -53,7 +53,8 @@
             app:destination="@id/seeAllFragment" />
             <action
                 android:id="@+id/action_movieDetailFragment_self"
-                app:destination="@id/movieDetailFragment" />
+                app:destination="@id/movieDetailFragment"
+                app:launchSingleTop="true"/>
         </fragment>
     <fragment
         android:id="@+id/tvSeriesDetailsFragment"
@@ -83,5 +84,15 @@
         android:id="@+id/seeAllFragment"
         android:name="com.example.movietmdb.ui.fragment.SeeAllFragment"
         android:label="fragment_see_all"
-        tools:layout="@layout/fragment_see_all" />
+        tools:layout="@layout/fragment_see_all" >
+        <action
+            android:id="@+id/action_seeAllFragment_to_peopleDetailFragment"
+            app:destination="@id/peopleDetailFragment" />
+        <action
+            android:id="@+id/action_seeAllFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+        <action
+            android:id="@+id/action_seeAllFragment_to_tvSeriesDetailsFragment"
+            app:destination="@id/tvSeriesDetailsFragment" />
+    </fragment>
 </navigation>

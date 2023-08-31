@@ -7,6 +7,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:orientation="vertical">
+
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
             android:layout_width="wrap_content"
@@ -15,7 +16,6 @@
 
             <ImageView
                 android:id="@+id/image"
-                android:maxWidth="170dp"
                 android:layout_width="160dp"
                 android:layout_height="220dp"
                 android:scaleType="fitXY"
@@ -23,14 +23,14 @@
 
 
         </androidx.cardview.widget.CardView>
-
         <TextView
             android:id="@+id/title"
-            android:layout_width="match_parent"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:textColor="@color/textPrimaryColor"
             android:text="title"
-            android:gravity="center"/>
+            android:gravity="center_horizontal"/>
+
     </LinearLayout>
 
 </layout>

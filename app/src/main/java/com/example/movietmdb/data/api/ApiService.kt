@@ -4,6 +4,7 @@ import com.example.movietmdb.data.model.content.Content
 import com.example.movietmdb.data.model.content.ContentCredits
 import com.example.movietmdb.data.model.content.DiscoverContent
 import com.example.movietmdb.data.model.people.DiscoverPeople
+import com.example.movietmdb.data.model.people.People
 import com.example.movietmdb.data.model.people.PeopleCredits
 import com.example.movietmdb.data.model.people.PeopleImages
 import retrofit2.Response
@@ -62,6 +63,9 @@ interface ApiService {
 
     @GET("/3/movie/{movie_id}?")
     suspend fun getMovieDetails(@Path("movie_id") movieId : Int,@Query("api_key") apiKey : String) : Response<Content>
+
+    @GET("/3/person/{person_id}?")
+    suspend fun getPeopleDetails(@Path("person_id") personId : Int, @Query("api_key") apiKey : String) : Response<People>
 
     @GET("/3/tv/{series_id}/credits?")
     suspend fun getTvSeriesCast(@Path("series_id") seriesId: Int,@Query("api_key") apiKey : String) : Response<ContentCredits>

@@ -7,6 +7,35 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/colorPrimaryDark">
+
+            <ImageView
+                android:id="@+id/backBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:src="@drawable/back_arrow"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Movie Detail"
+                android:textSize="25sp"
+                android:textColor="@color/textPrimaryColor"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/backBtn"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -135,6 +164,7 @@
                             android:textColor="@color/textPrimaryColor"
                             android:text="Movie Cast"/>
                         <TextView
+                            android:id="@+id/allCast"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/all_custom_btn"
@@ -179,6 +209,7 @@
                             android:textColor="@color/textPrimaryColor"
                             android:text="Similar Movies"/>
                         <TextView
+                            android:id="@+id/similarAll"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/all_custom_btn"
@@ -223,6 +254,7 @@
                             android:textColor="@color/textPrimaryColor"
                             android:text="Recommended Movies"/>
                         <TextView
+                            android:id="@+id/recommendedAll"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/all_custom_btn"

@@ -5,14 +5,95 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.movietmdb.R
+import com.example.movietmdb.databinding.FragmentPeopleDetailBinding
+import com.example.movietmdb.ui.adapter.ContentAdapterType1
+import com.example.movietmdb.ui.viewmodel.HomeViewModel
 
 class PeopleDetailFragment : Fragment() {
+    private lateinit var binding : FragmentPeopleDetailBinding
+    private lateinit var movieAdapter : ContentAdapterType1
+    private lateinit var tvSeriesAdapter : ContentAdapterType1
+    private val viewModel : HomeViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_people_detail, container, false)
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_people_detail, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val id = viewModel.peopleLiveData.value
+        initRv()
+        getData(id!!)
+        binding.backBtn.setOnClickListener {
+            findNavController().popBackStack()
+        }
+        onAllClick(id)
+    }
+    private fun onAllClick(id : Int) {
+        binding.movieAll.setOnClickListener {
+            viewModel.updateAllType("artist_movies")
+            viewModel.updateContentId(id)
+            findNavController().navigate(R.id.action_peopleDetailFragment_to_seeAllFragment)
+        }
+        binding.tvSeriesAll.setOnClickListener {
+            viewModel.updateAllType("artist_tv_series")
+            viewModel.updateContentId(id)
+            findNavController().navigate(R.id.action_peopleDetailFragment_to_seeAllFragment)
+        }
+    }
+    private fun initRv(){
+        movieAdapter = ContentAdapterType1(::onClick)
+        binding.rvMovies.adapter = movieAdapter
+        binding.rvMovies.layoutManager = LinearLayoutManager(binding.root.context,LinearLayoutManager.HORIZONTAL,false)
+
+        tvSeriesAdapter = ContentAdapterType1(::onClick)
+        binding.rvTvSeries.adapter = tvSeriesAdapter
+        binding.rvTvSeries.layoutManager = LinearLayoutManager(binding.root.context,LinearLayoutManager.HORIZONTAL,false)
+    }
+
+    private fun onClick(id : Int) {
+        viewModel.updateContentId(id)
+        findNavController().navigate(R.id.action_peopleDetailFragment_to_movieDetailFragment)
+    }
+
+    private fun getData(id : Int) {
+        viewModel.getPeopleDetails(id).observe(viewLifecycleOwner, Observer {
+            if(it.isSuccessful && it.body() != null) {
+                val uri = "https://image.tmdb.org/t/p/w500/" + it.body()!!.profilePath
+                Glide.with(binding.image.context)
+                    .load(uri)
+                    .into(binding.image)
+                binding.name.text = it.body()!!.name
+                binding.knownFor.text = it.body()!!.knownForDepartment
+                binding.birthPlace.text = it.body()!!.placeOfBirth
+                binding.dob.text = it.body()!!.birthday
+                binding.description.text = it.body()!!.biography
+            }
+        })
+
+       viewModel.getPeopleMovies(id).observe(viewLifecycleOwner, Observer {
+            if(it.isSuccessful && it.body() != null) {
+                movieAdapter.updateData(it.body()!!.cast)
+                movieAdapter.notifyDataSetChanged()
+            }
+        })
+
+        viewModel.getPeopleTvSeries(id).observe(viewLifecycleOwner, Observer {
+            if(it.isSuccessful && it.body() != null) {
+                tvSeriesAdapter.updateData(it.body()!!.cast)
+                tvSeriesAdapter.notifyDataSetChanged()
+            }
+        })
     }
 }

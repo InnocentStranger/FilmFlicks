@@ -15,7 +15,6 @@ interface Repository {
     fun getMoviesPaging(type: String,id : Int?) : LiveData<PagingData<Content>>
     fun getTvSeriesPaging(type : String,id : Int?) : LiveData<PagingData<Content>>
     fun getPeoplePaging(type : String,id : Int?) : LiveData<PagingData<People>>
-
     suspend fun getPeopleMovies(id : Int) : Response<PeopleCredits>
     suspend fun getPeopleTvSeries(id : Int) : Response<PeopleCredits>
     suspend fun getPeopleImages(id : Int) : Response<PeopleImages>
@@ -24,5 +23,7 @@ interface Repository {
     suspend fun getContentFirstPage(type : String,id: Int?) : Response<DiscoverContent>
     suspend fun getPeopleFirstPage(type : String) : Response<DiscoverPeople>
     suspend fun getMovieDetails(id : Int) : Response<Content>
+
+    suspend fun getPeopleDetails(id : Int) : Response<People>
 
 }

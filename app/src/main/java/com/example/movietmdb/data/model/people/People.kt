@@ -37,4 +37,19 @@ data class People(
     val character: String,
     @SerializedName("order")
     val order: Int,
+    @SerializedName("also_known_as")
+    val alsoKnownAs: List<Any>,
+    @SerializedName("biography")
+    val biography: String,
+    @SerializedName("birthday")
+    val birthday: String,
+    @SerializedName("deathday")
+    val deathday: Any,
+    @SerializedName("homepage")
+    val homepage: Any,
+    @SerializedName("imdb_id")
+    val imdbId: String,
+    @SerializedName("place_of_birth")
+    val placeOfBirth: String,
+
 )
