@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/moviesFragment">
+    <fragment
+        android:id="@+id/moviesFragment"
+        android:name="com.example.movietmdb.ui.fragment.MoviesFragment"
+        android:label="fragment_movies"
+        tools:layout="@layout/fragment_movies" >
+        <action
+            android:id="@+id/action_moviesFragment_to_seeAllFragment"
+            app:destination="@id/seeAllFragment" />
+        <action
+            android:id="@+id/action_moviesFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tvSeriesFragment"
+        android:name="com.example.movietmdb.ui.fragment.TvSeriesFragment"
+        android:label="fragment_tv_series"
+        tools:layout="@layout/fragment_tv_series" >
+        <action
+            android:id="@+id/action_tvSeriesFragment_to_seeAllFragment"
+            app:destination="@id/seeAllFragment" />
+        <action
+            android:id="@+id/action_tvSeriesFragment_to_tvSeriesDetailsFragment"
+            app:destination="@id/tvSeriesDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/peopleFragment"
+        android:name="com.example.movietmdb.ui.fragment.PeopleFragment"
+        android:label="fragment_people"
+        tools:layout="@layout/fragment_people" >
+        <action
+            android:id="@+id/action_peopleFragment_to_seeAllFragment"
+            app:destination="@id/seeAllFragment" />
+        <action
+            android:id="@+id/action_peopleFragment_to_peopleDetailFragment"
+            app:destination="@id/peopleDetailFragment" />
+    </fragment>
+        <fragment
+        android:id="@+id/movieDetailFragment"
+        android:name="com.example.movietmdb.ui.fragment.MovieDetailFragment"
+        android:label="fragment_movie_detail"
+        tools:layout="@layout/fragment_movie_detail" >
+        <action
+            android:id="@+id/action_movieDetailFragment_to_peopleDetailFragment"
+            app:destination="@id/peopleDetailFragment" />
+        <action
+            android:id="@+id/action_movieDetailFragment_to_seeAllFragment"
+            app:destination="@id/seeAllFragment" />
+            <action
+                android:id="@+id/action_movieDetailFragment_self"
+                app:destination="@id/movieDetailFragment" />
+        </fragment>
+    <fragment
+        android:id="@+id/tvSeriesDetailsFragment"
+        android:name="com.example.movietmdb.ui.fragment.TvSeriesDetailsFragment"
+        android:label="fragment_tv_series_details"
+        tools:layout="@layout/fragment_tv_series_details" >
+        <action
+            android:id="@+id/action_tvSeriesDetailsFragment_to_peopleDetailFragment"
+            app:destination="@id/peopleDetailFragment" />
+        <action
+            android:id="@+id/action_tvSeriesDetailsFragment_to_seeAllFragment"
+            app:destination="@id/seeAllFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/peopleDetailFragment"
+        android:name="com.example.movietmdb.ui.fragment.PeopleDetailFragment"
+        android:label="fragment_people_detail"
+        tools:layout="@layout/fragment_people_detail" >
+        <action
+            android:id="@+id/action_peopleDetailFragment_to_seeAllFragment"
+            app:destination="@id/seeAllFragment" />
+        <action
+            android:id="@+id/action_peopleDetailFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/seeAllFragment"
+        android:name="com.example.movietmdb.ui.fragment.SeeAllFragment"
+        android:label="fragment_see_all"
+        tools:layout="@layout/fragment_see_all" />
+</navigation>

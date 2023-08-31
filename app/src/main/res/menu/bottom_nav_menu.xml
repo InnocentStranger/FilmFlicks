@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="Movies"
+        android:id="@+id/movieNavBtn"
+        android:icon="@drawable/movie_nav_btn"/>
+    <item
+        android:title="TvSeries"
+        android:id="@+id/tvSeriesNavBtn"
+        android:icon="@drawable/tvseries_nav_btn"/>
+    <item
+        android:title="Artists"
+        android:id="@+id/artistNavBtn"
+        android:icon="@drawable/people_nav_btn"/>
+    <item
+        android:title="Search"
+        android:id="@+id/searchNavBtn"
+        android:icon="@drawable/search_nav_btn"/>
+</menu>
