@@ -16,6 +16,7 @@ import com.example.movietmdb.databinding.FragmentSeeAllBinding
 import com.example.movietmdb.ui.adapter.ContentAdapterType1
 import com.example.movietmdb.ui.adapter.ContentAdapterTypeAll
 import com.example.movietmdb.ui.adapter.PeopleAdapterType1
+import com.example.movietmdb.ui.adapter.PeopleAdapterTypeAll
 import com.example.movietmdb.ui.viewmodel.HomeViewModel
 import kotlinx.coroutines.launch
 
@@ -25,7 +26,9 @@ class SeeAllFragment : Fragment() {
     private lateinit var tvSeriesAdapter : ContentAdapterTypeAll
     private lateinit var movieAdapterFirst : ContentAdapterType1
     private lateinit var tvSeriesAdapterFirst : ContentAdapterType1
-    private lateinit var peopleAdapter : PeopleAdapterType1
+    private lateinit var peopleAdapterFirst : PeopleAdapterType1
+    private lateinit var peopleAdapter : PeopleAdapterTypeAll
+
     private val viewModel : HomeViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,27 +46,31 @@ class SeeAllFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRv()
-        var type = viewModel.allLiveData.value ?: ""
-        var id = viewModel.contentIdLiveData.value
+        val type = this.arguments?.getString("type") ?: ""
+        val id = this.arguments?.getString("id")?.toInt()
         getData(type,id)
     }
     private fun onClickPeople(id : Int) {
-        viewModel.updatePeopleId(id)
-        findNavController().navigate(R.id.action_seeAllFragment_to_peopleDetailFragment)
+        val bundle  = Bundle()
+        bundle.putString("id", id.toString())
+        findNavController().navigate(R.id.action_seeAllFragment_to_peopleDetailFragment,bundle)
     }
     private fun onClickMovie(id : Int) {
-        viewModel.updateContentId(id)
-        findNavController().navigate(R.id.action_seeAllFragment_to_movieDetailFragment)
+        val bundle  = Bundle()
+        bundle.putString("id", id.toString())
+        findNavController().navigate(R.id.action_seeAllFragment_to_movieDetailFragment,bundle)
     }
     private fun onClickTvSeries(id : Int) {
-        viewModel.updateContentId(id)
-        findNavController().navigate(R.id.action_seeAllFragment_to_tvSeriesDetailsFragment)
+        val bundle  = Bundle()
+        bundle.putString("id", id.toString())
+        findNavController().navigate(R.id.action_seeAllFragment_to_tvSeriesDetailsFragment,bundle)
     }
     private fun initRv() {
+        peopleAdapter = PeopleAdapterTypeAll(::onClickPeople)
         tvSeriesAdapterFirst = ContentAdapterType1(::onClickTvSeries)
         tvSeriesAdapter = ContentAdapterTypeAll(::onClickTvSeries)
         movieAdapterFirst = ContentAdapterType1(::onClickMovie)
-        peopleAdapter = PeopleAdapterType1(::onClickPeople)
+        peopleAdapterFirst = PeopleAdapterType1(::onClickPeople)
         movieAdapter = ContentAdapterTypeAll(::onClickMovie)
         binding.allRv.adapter = movieAdapter
         binding.allRv.layoutManager = GridLayoutManager(binding.root.context,2)
@@ -118,12 +125,21 @@ class SeeAllFragment : Fragment() {
                     }
                 })
             }
+            "tv_series_cast" -> {
+                binding.allRv.adapter = peopleAdapterFirst
+                viewModel.getTvSeriesCast(id!!).observe(viewLifecycleOwner,Observer{
+                    lifecycleScope.launch {
+                        peopleAdapterFirst.updateData(it.body()!!.cast)
+                        peopleAdapterFirst.notifyDataSetChanged()
+                    }
+                })
+            }
             "movie_cast" -> {
-                binding.allRv.adapter = peopleAdapter
+                binding.allRv.adapter = peopleAdapterFirst
                 viewModel.getMovieCast(id!!).observe(viewLifecycleOwner,Observer{
                     lifecycleScope.launch {
-                        peopleAdapter.updateData(it.body()!!.cast)
-                        peopleAdapter.notifyDataSetChanged()
+                        peopleAdapterFirst.updateData(it.body()!!.cast)
+                        peopleAdapterFirst.notifyDataSetChanged()
                     }
                 })
             }
@@ -196,6 +212,24 @@ class SeeAllFragment : Fragment() {
                     lifecycleScope.launch {
                         tvSeriesAdapter.submitData(it)
                         tvSeriesAdapter.notifyDataSetChanged()
+                    }
+                })
+            }
+            "popular_people" -> {
+                binding.allRv.adapter = peopleAdapter
+                viewModel.getTrendingPeoplePaging(type,id).observe(viewLifecycleOwner,Observer{
+                    lifecycleScope.launch {
+                        peopleAdapter.submitData(it)
+                        peopleAdapterFirst.notifyDataSetChanged()
+                    }
+                })
+            }
+            "trending_people" -> {
+                binding.allRv.adapter = peopleAdapter
+                viewModel.getTrendingPeoplePaging(type,id).observe(viewLifecycleOwner,Observer{
+                    lifecycleScope.launch {
+                        peopleAdapter.submitData(it)
+                        peopleAdapterFirst.notifyDataSetChanged()
                     }
                 })
             }

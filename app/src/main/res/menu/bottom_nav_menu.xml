@@ -3,18 +3,18 @@
 
     <item
         android:title="Movies"
-        android:id="@+id/movieNavBtn"
+        android:id="@id/moviesFragment"
         android:icon="@drawable/movie_nav_btn"/>
     <item
         android:title="TvSeries"
-        android:id="@+id/tvSeriesNavBtn"
+        android:id="@id/tvSeriesFragment"
         android:icon="@drawable/tvseries_nav_btn"/>
     <item
         android:title="Artists"
-        android:id="@+id/artistNavBtn"
+        android:id="@id/peopleFragment"
         android:icon="@drawable/people_nav_btn"/>
     <item
         android:title="Search"
-        android:id="@+id/searchNavBtn"
+        android:id="@id/searchFragment"
         android:icon="@drawable/search_nav_btn"/>
 </menu>

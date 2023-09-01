@@ -1,6 +1,7 @@
 package com.example.movietmdb.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -32,7 +33,7 @@ class PeopleDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val id = viewModel.peopleLiveData.value
+        val id = this.arguments?.getString("id")?.toInt()
         initRv()
         getData(id!!)
         binding.backBtn.setOnClickListener {
@@ -42,30 +43,40 @@ class PeopleDetailFragment : Fragment() {
     }
     private fun onAllClick(id : Int) {
         binding.movieAll.setOnClickListener {
-            viewModel.updateAllType("artist_movies")
-            viewModel.updateContentId(id)
-            findNavController().navigate(R.id.action_peopleDetailFragment_to_seeAllFragment)
+            val bundle = Bundle()
+            bundle.putString("type","artist_movies")
+            bundle.putString("id",id.toString())
+            findNavController().navigate(R.id.action_peopleDetailFragment_to_seeAllFragment,bundle)
         }
         binding.tvSeriesAll.setOnClickListener {
-            viewModel.updateAllType("artist_tv_series")
-            viewModel.updateContentId(id)
-            findNavController().navigate(R.id.action_peopleDetailFragment_to_seeAllFragment)
+            val bundle = Bundle()
+            bundle.putString("type","artist_tv_series")
+            bundle.putString("id",id.toString())
+            findNavController().navigate(R.id.action_peopleDetailFragment_to_seeAllFragment,bundle)
         }
     }
     private fun initRv(){
-        movieAdapter = ContentAdapterType1(::onClick)
+        movieAdapter = ContentAdapterType1(::onClickMovie)
         binding.rvMovies.adapter = movieAdapter
         binding.rvMovies.layoutManager = LinearLayoutManager(binding.root.context,LinearLayoutManager.HORIZONTAL,false)
 
-        tvSeriesAdapter = ContentAdapterType1(::onClick)
+        tvSeriesAdapter = ContentAdapterType1(::onClickTvSeries)
         binding.rvTvSeries.adapter = tvSeriesAdapter
         binding.rvTvSeries.layoutManager = LinearLayoutManager(binding.root.context,LinearLayoutManager.HORIZONTAL,false)
     }
 
-    private fun onClick(id : Int) {
-        viewModel.updateContentId(id)
-        findNavController().navigate(R.id.action_peopleDetailFragment_to_movieDetailFragment)
+    private fun onClickMovie(id : Int) {
+        val bundle  = Bundle()
+        bundle.putString("id", id.toString())
+        findNavController().navigate(R.id.action_peopleDetailFragment_to_movieDetailFragment,bundle)
     }
+
+    private fun onClickTvSeries(id : Int) {
+        val bundle  = Bundle()
+        bundle.putString("id", id.toString())
+        findNavController().navigate(R.id.action_peopleDetailFragment_to_tvSeriesDetailsFragment,bundle)
+    }
+
 
     private fun getData(id : Int) {
         viewModel.getPeopleDetails(id).observe(viewLifecycleOwner, Observer {

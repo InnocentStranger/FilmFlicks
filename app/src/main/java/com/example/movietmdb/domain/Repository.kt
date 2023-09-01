@@ -24,6 +24,7 @@ interface Repository {
     suspend fun getPeopleFirstPage(type : String) : Response<DiscoverPeople>
     suspend fun getMovieDetails(id : Int) : Response<Content>
 
+    suspend fun getTvSeriesDetails(id: Int) : Response<Content>
     suspend fun getPeopleDetails(id : Int) : Response<People>
 
 }

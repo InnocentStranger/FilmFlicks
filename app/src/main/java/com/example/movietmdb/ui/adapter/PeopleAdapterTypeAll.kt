@@ -11,11 +11,11 @@ import com.example.movietmdb.R
 import com.example.movietmdb.data.model.people.People
 import com.example.movietmdb.databinding.SingleListItem1Binding
 
-class PeopleAdapterTypeAll : PagingDataAdapter<People, PeopleAllViewHolder>(COMPARATOR_PEOPLE){
+class PeopleAdapterTypeAll(private val onClick : (id : Int) -> Unit) : PagingDataAdapter<People, PeopleAllViewHolder>(COMPARATOR_PEOPLE){
     override fun onBindViewHolder(holder: PeopleAllViewHolder, position: Int) {
         val item = getItem(position)
         if(item != null) {
-            holder.bind(item)
+            holder.bind(item,onClick)
         }
     }
 
@@ -28,12 +28,15 @@ class PeopleAdapterTypeAll : PagingDataAdapter<People, PeopleAllViewHolder>(COMP
 }
 class PeopleAllViewHolder(private  val binding : SingleListItem1Binding)
     : RecyclerView.ViewHolder(binding.root) {
-    fun bind(people : People) {
+    fun bind(people : People,onClick: (id: Int) -> Unit) {
         binding.title.text = people.name
         val uri = "https://image.tmdb.org/t/p/w500/" + people.profilePath
         Glide.with(binding.image.context)
             .load(uri)
             .into(binding.image)
+        binding.cardView.setOnClickListener {
+            onClick(people.id)
+        }
     }
 }
 val COMPARATOR_PEOPLE = object : DiffUtil.ItemCallback<People>() {

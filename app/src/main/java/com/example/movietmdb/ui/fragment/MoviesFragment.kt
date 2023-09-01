@@ -2,30 +2,23 @@ package com.example.movietmdb.ui.fragment
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.movietmdb.R
 import com.example.movietmdb.databinding.FragmentMoviesBinding
-import com.example.movietmdb.domain.Repository
 import com.example.movietmdb.ui.adapter.ContentAdapterType1
 import com.example.movietmdb.ui.adapter.ContentAdapterType2
 import com.example.movietmdb.ui.adapter.ContentAdapterType3
 import com.example.movietmdb.ui.viewmodel.HomeViewModel
-import com.example.movietmdb.ui.viewmodel.HomeViewModelFactory
 
 
 class MoviesFragment() : Fragment() {
@@ -50,17 +43,16 @@ class MoviesFragment() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initRv()
         provideData()
         allClick()
-
     }
 
     private fun onClickContent(id : Int) {
         try {
-            viewModel.updateContentId(id)
-            findNavController().navigate(R.id.action_moviesFragment_to_movieDetailFragment)
+            val bundle  = Bundle()
+            bundle.putString("id", id.toString())
+            findNavController().navigate(R.id.action_moviesFragment_to_movieDetailFragment,bundle)
         }catch (e : Exception) {
             Log.i("MyTag",e.toString())
         }
@@ -110,20 +102,24 @@ class MoviesFragment() : Fragment() {
 
     private fun allClick() {
         binding.popularAll.setOnClickListener{
-            viewModel.updateAllType("popular_movies")
-            findNavController().navigate(R.id.action_moviesFragment_to_seeAllFragment)
+            val bundle  = Bundle()
+            bundle.putString("type", "popular_movies")
+            findNavController().navigate(R.id.action_moviesFragment_to_seeAllFragment,bundle)
         }
         binding.topRatedAll.setOnClickListener {
-            viewModel.updateAllType("top_rated_movies")
-            findNavController().navigate(R.id.action_moviesFragment_to_seeAllFragment)
+            val bundle  = Bundle()
+            bundle.putString("type", "top_rated_movies")
+            findNavController().navigate(R.id.action_moviesFragment_to_seeAllFragment,bundle)
         }
         binding.nowPlayingAll.setOnClickListener {
-            viewModel.updateAllType("now_playing_movies")
-            findNavController().navigate(R.id.action_moviesFragment_to_seeAllFragment)
+            val bundle  = Bundle()
+            bundle.putString("type", "now_playing_movies")
+            findNavController().navigate(R.id.action_moviesFragment_to_seeAllFragment,bundle)
         }
         binding.upComingAll.setOnClickListener {
-            viewModel.updateAllType("upcoming_movies")
-            findNavController().navigate(R.id.action_moviesFragment_to_seeAllFragment)
+            val bundle  = Bundle()
+            bundle.putString("type", "upcoming_movies")
+            findNavController().navigate(R.id.action_moviesFragment_to_seeAllFragment,bundle)
         }
     }
 }

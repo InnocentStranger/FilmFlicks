@@ -8,18 +8,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.example.movietmdb.domain.Repository
 
+
 class HomeViewModel(private val repository: Repository) : ViewModel() {
-    private val allMutableLiveData = MutableLiveData<String>("")
-    val allLiveData : LiveData<String>
-        get() = allMutableLiveData
-
-    private val contentIdMutableLiveData = MutableLiveData<Int>(0)
-    val contentIdLiveData : LiveData<Int>
-        get() = contentIdMutableLiveData
-
-    private val peopleMutableLiveData = MutableLiveData<Int>(0)
-    val peopleLiveData : LiveData<Int>
-        get() = peopleMutableLiveData
 
     fun getPopularMoviesFirstPage() = liveData{
         emit(repository.getContentFirstPage("popular_movies",null))
@@ -35,16 +25,6 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
     }
     fun getPopularMoviesPaging(type : String) = repository.getMoviesPaging(type,null).cachedIn(viewModelScope)
 
-    fun updateAllType(type : String) {
-        allMutableLiveData.value = type
-    }
-    fun updateContentId(id : Int) {
-        contentIdMutableLiveData.value = id
-    }
-
-    fun updatePeopleId(id : Int) {
-        peopleMutableLiveData.value = id
-    }
     fun getTopRatedMoviesPaging(type : String) = repository.getMoviesPaging(type,null).cachedIn(viewModelScope)
     fun getNowPlayingMoviesPaging(type : String) = repository.getMoviesPaging(type,null).cachedIn(viewModelScope)
     fun getUpcomingMoviesPaging(type : String) = repository.getMoviesPaging(type,null).cachedIn(viewModelScope)
@@ -92,4 +72,39 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
 
     fun getAiringTodayTvSeiresPaging(type : String,id : Int?) = repository
         .getTvSeriesPaging(type,id).cachedIn(viewModelScope)
+
+    fun getTvSeriesDetails(id : Int)  = liveData {
+        emit(repository.getTvSeriesDetails(id))
+    }
+
+    fun getSimilarTvSeriesFirstPage(id : Int) = liveData {
+        emit(repository.getContentFirstPage("similar_tv_series",id))
+    }
+    fun getRecommendedTvSeriesFirstPage(id : Int) = liveData {
+        emit(repository.getContentFirstPage("recommended_tv_series",id))
+    }
+    fun getTvSeriesCast(id: Int) = liveData {
+        emit(repository.getTvSeriesCast(id))
+    }
+    fun getPopularTvSeriesFirstPage() = liveData{
+        emit(repository.getContentFirstPage("popular_tv_series",null))
+    }
+
+    fun getTopRatedTvSeriesFirstPage() = liveData{
+        emit(repository.getContentFirstPage("top_rated_tv_series",null))
+    }
+    fun getOnTheAirTvSeriesFirstPage() = liveData{
+        emit(repository.getContentFirstPage("on_the_air_tv_series",null))
+    }
+    fun getAiringTodayTvSeriesFirstPage() = liveData{
+        emit(repository.getContentFirstPage("airing_today_tv_series",null))
+    }
+    fun getPopularPeopleFirstPage() = liveData {
+        emit(repository.getPeopleFirstPage("popular_people"))
+    }
+    fun getTrendingPeopleFirstPage() = liveData {
+        emit(repository.getPeopleFirstPage("trending_people"))
+    }
+    fun getPopularPeoplePaging(type : String,id : Int?) = repository.getPeoplePaging(type,id).cachedIn(viewModelScope)
+    fun getTrendingPeoplePaging(type : String,id : Int?) = repository.getPeoplePaging(type,id).cachedIn(viewModelScope)
 }

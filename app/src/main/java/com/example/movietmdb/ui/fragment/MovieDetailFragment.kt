@@ -1,6 +1,7 @@
 package com.example.movietmdb.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,7 +39,7 @@ class MovieDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val movieId = viewModel.contentIdLiveData.value
+        val movieId = this.arguments?.getString("id")?.toInt()
         initRv()
         if(movieId != null) getData(movieId)
         binding.backBtn.setOnClickListener {
@@ -48,28 +49,33 @@ class MovieDetailFragment : Fragment() {
     }
     private fun allClick(movieId: Int) {
         binding.allCast.setOnClickListener {
-            viewModel.updateAllType("movie_cast")
-            viewModel.updateContentId(movieId)
-            findNavController().navigate(R.id.action_movieDetailFragment_to_seeAllFragment)
+            val bundle = Bundle()
+            bundle.putString("type","movie_cast")
+            bundle.putString("id",movieId.toString())
+            findNavController().navigate(R.id.action_movieDetailFragment_to_seeAllFragment,bundle)
         }
         binding.similarAll.setOnClickListener {
-            viewModel.updateAllType("similar_movies")
-            viewModel.updateContentId(movieId)
-            findNavController().navigate(R.id.action_movieDetailFragment_to_seeAllFragment)
+            val bundle = Bundle()
+            bundle.putString("type","similar_movies")
+            bundle.putString("id",movieId.toString())
+            findNavController().navigate(R.id.action_movieDetailFragment_to_seeAllFragment,bundle)
         }
         binding.recommendedAll.setOnClickListener {
-            viewModel.updateAllType("recommended_movies")
-            viewModel.updateContentId(movieId)
-            findNavController().navigate(R.id.action_movieDetailFragment_to_seeAllFragment)
+            val bundle = Bundle()
+            bundle.putString("type","recommended_movies")
+            bundle.putString("id",movieId.toString())
+            findNavController().navigate(R.id.action_movieDetailFragment_to_seeAllFragment,bundle)
         }
     }
     private fun onClickContent(id : Int) {
-        viewModel.updateContentId(id)
-        findNavController().navigate(R.id.action_movieDetailFragment_self)
+        val bundle  = Bundle()
+        bundle.putString("id", id.toString())
+        findNavController().navigate(R.id.action_movieDetailFragment_self,bundle)
     }
     private fun onClickPeople(id : Int) {
-        viewModel.updatePeopleId(id)
-        findNavController().navigate(R.id.action_movieDetailFragment_to_peopleDetailFragment)
+        val bundle  = Bundle()
+        bundle.putString("id", id.toString())
+        findNavController().navigate(R.id.action_movieDetailFragment_to_peopleDetailFragment,bundle)
     }
     private fun initRv() {
         genreAdapter = GenreAdapterTypeBox()

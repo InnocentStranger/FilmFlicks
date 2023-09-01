@@ -64,6 +64,8 @@ interface ApiService {
     @GET("/3/movie/{movie_id}?")
     suspend fun getMovieDetails(@Path("movie_id") movieId : Int,@Query("api_key") apiKey : String) : Response<Content>
 
+    @GET("/3/tv/{series_id}")
+    suspend fun getTvSeriesDetails(@Path("series_id") seriesId : Int, @Query("api_key") apiKey: String) : Response<Content>
     @GET("/3/person/{person_id}?")
     suspend fun getPeopleDetails(@Path("person_id") personId : Int, @Query("api_key") apiKey : String) : Response<People>
 

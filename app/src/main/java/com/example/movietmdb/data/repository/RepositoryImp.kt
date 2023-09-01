@@ -112,6 +112,10 @@ class RepositoryImp(private val apiService: ApiService, private val apiKey : Str
         return apiService.getMovieDetails(id,apiKey)
     }
 
+    override suspend fun getTvSeriesDetails(id: Int): Response<Content> {
+        return apiService.getTvSeriesDetails(id,apiKey)
+    }
+
     override suspend fun getPeopleDetails(id: Int): Response<People> {
         return apiService.getPeopleDetails(id,apiKey)
     }
