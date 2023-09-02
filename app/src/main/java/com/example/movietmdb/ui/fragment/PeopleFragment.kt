@@ -75,7 +75,7 @@ class PeopleFragment : Fragment() {
         viewModel.getTrendingPeopleFirstPage().observe(viewLifecycleOwner,Observer{
             if(it.isSuccessful && it.body() != null) {
                 trendingAdapter.updateData(it.body()!!.itemList)
-                popularAdapter.notifyDataSetChanged()
+                trendingAdapter.notifyDataSetChanged()
             }
         })
     }

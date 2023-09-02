@@ -37,7 +37,9 @@ class ContentAdapterType1(private val onClick : (id: Int) -> Unit) : RecyclerVie
 class ContentViewHolder(private val binding : SingleListItem1Binding)
     : RecyclerView.ViewHolder(binding.root){
     fun bind(content : Content,onClick : (id: Int) -> Unit) {
-        binding.title.text = content.title
+        var title = content.title
+        if(title == null) title = content.name
+        binding.title.text = title
         val uri = "https://image.tmdb.org/t/p/w500/" + content.posterPath
         Glide.with(binding.image.context)
             .load(uri)

@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.example.movietmdb.R
 import com.example.movietmdb.data.model.content.Content
 import com.example.movietmdb.databinding.SingleListItem3Binding
-import com.example.movietmdb.ui.util.movieGenreMap
+import com.example.movietmdb.ui.util.genreMap
 
 class ContentAdapterType3(private val onClick : (id: Int) -> Unit) : RecyclerView.Adapter<ContentType3ViewHolder>() {
     private var data = ArrayList<Content>()
@@ -38,17 +38,21 @@ class ContentAdapterType3(private val onClick : (id: Int) -> Unit) : RecyclerVie
 class ContentType3ViewHolder(private val binding : SingleListItem3Binding)
     : RecyclerView.ViewHolder(binding.root){
     fun bind(content : Content,onClick: (id: Int) -> Unit) {
-        binding.textView.text = content.title
+        var title = content.title
+        if(title == null) title = content.name
+        binding.textView.text = title
+
         val uri = "https://image.tmdb.org/t/p/w500/" + content.posterPath
         Glide.with(binding.imageView.context)
             .load(uri)
             .into(binding.imageView)
         var genre : String = ""
-        val no = 3.coerceAtMost(content.genreIds.size)
+        val no = content.genreIds.size
         for(i in 0 until no-1) {
-            genre += movieGenreMap[content.genreIds[i]] + ", "
+            genre += genreMap[content.genreIds[i]] + ", "
         }
-        if(no-1 >= 0) genre += movieGenreMap[content.genreIds[no-1]]
+        if(no-1 >= 0) genre += genreMap[content.genreIds[no-1]]
+
         binding.textView2.text = genre
         binding.type3ListItemLayout.setOnClickListener {
             onClick(content.id)

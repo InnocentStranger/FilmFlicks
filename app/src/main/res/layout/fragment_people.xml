@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/colorPrimaryDark">
+        android:background="@color/background">
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -26,8 +26,8 @@
                         android:layout_weight="1"
                         android:text="Popular Artists"
                         android:textStyle="bold"
-                        android:textSize="30sp"
-                        android:textColor="@color/textPrimaryColor"
+                        android:textSize="20sp"
+                        android:textColor="@color/text"
                         />
                     <TextView
                         android:id="@+id/popularAll"
@@ -35,10 +35,12 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/all_custom_btn"
                         android:text="All"
-                        android:textColor="@color/textPrimaryColor"
+                        android:textColor="@color/text"
                         android:textSize="20sp"
-                        android:paddingStart="5dp"
-                        android:paddingEnd="5dp"/>
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"/>
                 </LinearLayout>
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/popularRv"
@@ -58,8 +60,8 @@
                         android:layout_weight="1"
                         android:text="Trending Artists"
                         android:textStyle="bold"
-                        android:textSize="30sp"
-                        android:textColor="@color/textPrimaryColor"
+                        android:textSize="20sp"
+                        android:textColor="@color/text"
                         />
                     <TextView
                         android:id="@+id/trendingAll"
@@ -67,10 +69,12 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/all_custom_btn"
                         android:text="All"
-                        android:textColor="@color/textPrimaryColor"
+                        android:textColor="@color/text"
                         android:textSize="20sp"
-                        android:paddingStart="5dp"
-                        android:paddingEnd="5dp"/>
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"/>
                 </LinearLayout>
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/trendingRv"

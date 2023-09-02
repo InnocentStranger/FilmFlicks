@@ -11,6 +11,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.movietmdb.R
@@ -30,7 +31,6 @@ class MainActivity : AppCompatActivity() {
     lateinit var factory: HomeViewModelFactory
     private lateinit var viewModel: HomeViewModel
     private lateinit var binding : ActivityMainBinding
-    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,5 +45,12 @@ class MainActivity : AppCompatActivity() {
         val navView = binding.bottomNavigationView
         navView.setupWithNavController(navController)
 
+        /* To make bottomNavItem selection after going to other fragment, then going to some other item of bottomNavBar
+        and then returning back */
+        navView.setOnItemSelectedListener {
+            item ->
+            NavigationUI.onNavDestinationSelected(item, navController)
+            return@setOnItemSelectedListener true
+        }
     }
 }

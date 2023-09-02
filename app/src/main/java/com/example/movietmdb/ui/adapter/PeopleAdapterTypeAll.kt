@@ -34,7 +34,7 @@ class PeopleAllViewHolder(private  val binding : SingleListItem1Binding)
         Glide.with(binding.image.context)
             .load(uri)
             .into(binding.image)
-        binding.cardView.setOnClickListener {
+        binding.layout.setOnClickListener {
             onClick(people.id)
         }
     }

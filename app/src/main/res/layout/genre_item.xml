@@ -12,7 +12,7 @@
         android:layout_margin="10dp"
         android:background="@drawable/genre_box"
         android:text="Genre"
-        android:textColor="@color/textPrimaryColor"
+        android:textColor="@color/text"
         android:padding="5dp"
         android:textSize="15sp"/>
 

@@ -14,7 +14,7 @@ tools:context=".ui.fragment.TvSeriesFragment">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/background"
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
@@ -24,7 +24,7 @@ tools:context=".ui.fragment.TvSeriesFragment">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
+                    android:background="@color/background"
                     android:orientation="vertical">
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -37,7 +37,7 @@ tools:context=".ui.fragment.TvSeriesFragment">
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Popular TvSeries"
-                            android:textColor="@color/textPrimaryColor"
+                            android:textColor="@color/text"
                             android:textSize="20sp"
                             android:layout_weight="1"
                             android:textStyle="bold" />
@@ -46,12 +46,14 @@ tools:context=".ui.fragment.TvSeriesFragment">
                             android:id="@+id/popularAll"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingStart="5dp"
-                            android:paddingEnd="5dp"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
                             android:text="ALL"
 
                             android:background="@drawable/all_custom_btn"
-                            android:textColor="@color/colorPrimaryDark"
+                            android:textColor="@color/text"
                             android:textSize="15sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -59,7 +61,7 @@ tools:context=".ui.fragment.TvSeriesFragment">
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/popularRv"
                         android:layout_width="match_parent"
-                        android:background="@color/colorPrimary"
+                        android:background="@color/background"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"/>
 
@@ -74,7 +76,7 @@ tools:context=".ui.fragment.TvSeriesFragment">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
+                    android:background="@color/background"
                     android:orientation="vertical">
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -87,7 +89,7 @@ tools:context=".ui.fragment.TvSeriesFragment">
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="TopRated TvSeries"
-                            android:textColor="@color/textPrimaryColor"
+                            android:textColor="@color/text"
                             android:textSize="20sp"
                             android:layout_weight="1"
                             android:textStyle="bold" />
@@ -96,18 +98,20 @@ tools:context=".ui.fragment.TvSeriesFragment">
                             android:id="@+id/topRatedAll"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingStart="5dp"
-                            android:paddingEnd="5dp"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
                             android:text="ALL"
                             android:background="@drawable/all_custom_btn"
-                            android:textColor="@color/colorPrimaryDark"
+                            android:textColor="@color/text"
                             android:textSize="15sp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/topRatedRv"
-                        android:background="@color/colorPrimary"
+                        android:background="@color/background"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"/>
@@ -123,7 +127,7 @@ tools:context=".ui.fragment.TvSeriesFragment">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
+                    android:background="@color/background"
                     android:orientation="vertical">
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -135,8 +139,8 @@ tools:context=".ui.fragment.TvSeriesFragment">
                             android:id="@+id/nowPlayingCategory"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Airing Today TvSeries"
-                            android:textColor="@color/textPrimaryColor"
+                            android:text="Airing Today"
+                            android:textColor="@color/text"
                             android:textSize="20sp"
                             android:layout_weight="1"
                             android:textStyle="bold" />
@@ -145,11 +149,13 @@ tools:context=".ui.fragment.TvSeriesFragment">
                             android:id="@+id/nowPlayingAll"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingStart="5dp"
-                            android:paddingEnd="5dp"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
                             android:text="ALL"
                             android:background="@drawable/all_custom_btn"
-                            android:textColor="@color/colorPrimaryDark"
+                            android:textColor="@color/text"
                             android:textSize="15sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -157,7 +163,7 @@ tools:context=".ui.fragment.TvSeriesFragment">
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/nowPlayingRv"
                         android:layout_width="match_parent"
-                        android:background="@color/colorPrimary"
+                        android:background="@color/background"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"/>
 
@@ -172,7 +178,7 @@ tools:context=".ui.fragment.TvSeriesFragment">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorPrimary"
+                    android:background="@color/background"
                     android:orientation="vertical">
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -184,8 +190,8 @@ tools:context=".ui.fragment.TvSeriesFragment">
                             android:id="@+id/upcomingCategory"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="On The Air TvSeries"
-                            android:textColor="@color/textPrimaryColor"
+                            android:text="Airing Next Week"
+                            android:textColor="@color/text"
                             android:textSize="20sp"
                             android:layout_weight="1"
                             android:textStyle="bold" />
@@ -194,11 +200,13 @@ tools:context=".ui.fragment.TvSeriesFragment">
                             android:id="@+id/upComingAll"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingStart="5dp"
-                            android:paddingEnd="5dp"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
                             android:text="ALL"
                             android:background="@drawable/all_custom_btn"
-                            android:textColor="@color/colorPrimaryDark"
+                            android:textColor="@color/text"
                             android:textSize="15sp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -207,7 +215,7 @@ tools:context=".ui.fragment.TvSeriesFragment">
                         android:id="@+id/upcomingRv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/colorPrimary"
+                        android:background="@color/background"
                         android:layout_margin="5dp"/>
 
                 </LinearLayout>

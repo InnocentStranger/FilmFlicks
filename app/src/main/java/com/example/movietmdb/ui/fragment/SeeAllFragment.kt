@@ -14,20 +14,23 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.movietmdb.R
 import com.example.movietmdb.databinding.FragmentSeeAllBinding
 import com.example.movietmdb.ui.adapter.ContentAdapterType1
-import com.example.movietmdb.ui.adapter.ContentAdapterTypeAll
+import com.example.movietmdb.ui.adapter.SearchAdapterTypeAll
 import com.example.movietmdb.ui.adapter.PeopleAdapterType1
 import com.example.movietmdb.ui.adapter.PeopleAdapterTypeAll
+import com.example.movietmdb.ui.adapter.SearchAdapterType1
+import com.example.movietmdb.ui.adapter.SearchPeopleAdapterType1
+import com.example.movietmdb.ui.adapter.SearchPeopleAdapterTypeAll
 import com.example.movietmdb.ui.viewmodel.HomeViewModel
 import kotlinx.coroutines.launch
 
 class SeeAllFragment : Fragment() {
     private lateinit var binding : FragmentSeeAllBinding
-    private lateinit var movieAdapter : ContentAdapterTypeAll
-    private lateinit var tvSeriesAdapter : ContentAdapterTypeAll
-    private lateinit var movieAdapterFirst : ContentAdapterType1
-    private lateinit var tvSeriesAdapterFirst : ContentAdapterType1
-    private lateinit var peopleAdapterFirst : PeopleAdapterType1
-    private lateinit var peopleAdapter : PeopleAdapterTypeAll
+    private lateinit var movieAdapter : SearchAdapterTypeAll
+    private lateinit var tvSeriesAdapter : SearchAdapterTypeAll
+    private lateinit var movieAdapterFirst : SearchAdapterType1
+    private lateinit var tvSeriesAdapterFirst : SearchAdapterType1
+    private lateinit var peopleAdapterFirst : SearchPeopleAdapterType1
+    private lateinit var peopleAdapter : SearchPeopleAdapterTypeAll
 
     private val viewModel : HomeViewModel by activityViewModels()
     override fun onCreateView(
@@ -49,6 +52,9 @@ class SeeAllFragment : Fragment() {
         val type = this.arguments?.getString("type") ?: ""
         val id = this.arguments?.getString("id")?.toInt()
         getData(type,id)
+        binding.backBtn.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
     private fun onClickPeople(id : Int) {
         val bundle  = Bundle()
@@ -66,12 +72,12 @@ class SeeAllFragment : Fragment() {
         findNavController().navigate(R.id.action_seeAllFragment_to_tvSeriesDetailsFragment,bundle)
     }
     private fun initRv() {
-        peopleAdapter = PeopleAdapterTypeAll(::onClickPeople)
-        tvSeriesAdapterFirst = ContentAdapterType1(::onClickTvSeries)
-        tvSeriesAdapter = ContentAdapterTypeAll(::onClickTvSeries)
-        movieAdapterFirst = ContentAdapterType1(::onClickMovie)
-        peopleAdapterFirst = PeopleAdapterType1(::onClickPeople)
-        movieAdapter = ContentAdapterTypeAll(::onClickMovie)
+        peopleAdapter = SearchPeopleAdapterTypeAll(::onClickPeople)
+        tvSeriesAdapterFirst = SearchAdapterType1(::onClickTvSeries)
+        tvSeriesAdapter = SearchAdapterTypeAll(::onClickTvSeries)
+        movieAdapterFirst = SearchAdapterType1(::onClickMovie)
+        peopleAdapterFirst = SearchPeopleAdapterType1(::onClickPeople)
+        movieAdapter = SearchAdapterTypeAll(::onClickMovie)
         binding.allRv.adapter = movieAdapter
         binding.allRv.layoutManager = GridLayoutManager(binding.root.context,2)
     }

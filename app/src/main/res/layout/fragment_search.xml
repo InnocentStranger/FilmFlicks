@@ -1,14 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragment.SearchFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:background="@color/background"
+       android:orientation="vertical">
 
-</FrameLayout>
+       <androidx.appcompat.widget.SearchView
+           android:id="@+id/searchView"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           app:queryHint="Search Here"
+           app:iconifiedByDefault="false"
+           android:layout_margin="12dp"
+           app:queryBackground="@android:color/transparent"
+           android:background="@drawable/edit_text_box"/>
+
+
+       <androidx.core.widget.NestedScrollView
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
+
+           <androidx.recyclerview.widget.RecyclerView
+               android:id="@+id/recyclerView"
+
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_margin="12dp"/>
+
+       </androidx.core.widget.NestedScrollView>
+
+
+   </LinearLayout>
+
+</layout>

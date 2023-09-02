@@ -12,8 +12,8 @@
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:defaultNavHost="true"
             android:layout_weight="1"
+            app:defaultNavHost="true"
             app:navGraph="@navigation/nav_graph" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -21,8 +21,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:itemIconTint="@color/rippleColor"
-            app:itemTextColor="@color/textPrimaryColor"
-            android:background="#FF000000"
+            app:itemTextColor="@color/text"
+            android:background="@color/background"
             app:menu="@menu/bottom_nav_menu"/>
 
     </LinearLayout>

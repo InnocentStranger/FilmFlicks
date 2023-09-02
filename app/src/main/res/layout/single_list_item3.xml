@@ -5,21 +5,29 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/type3ListItemLayout"
-        android:layout_width="350dp"
-        android:layout_height="60dp">
+        android:layout_width="match_parent"
+        android:background="@color/background"
+        android:layout_height="wrap_content">
 
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="60dp"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            android:layout_margin="5dp"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="5dp"
+            android:elevation="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@drawable/people_nav_btn" />
+            android:layout_margin="5dp">
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="70dp"
+                android:layout_height="80dp"
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/people_nav_btn" />
+        </androidx.cardview.widget.CardView>
+
 
         <TextView
             android:id="@+id/textView"
@@ -29,8 +37,8 @@
             android:textStyle="bold"
             android:textSize="18sp"
             android:text="TextView"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            android:textColor="@color/textPrimaryColor"
+            app:layout_constraintStart_toEndOf="@+id/cardView"
+            android:textColor="@color/text"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -38,9 +46,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="TextView"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            android:textColor="@color/textPrimaryColor"
+            android:maxWidth="250dp"
+            android:text="genre"
+            android:ellipsize="end"
+            android:maxLines="1"
+            app:layout_constraintStart_toEndOf="@+id/cardView"
+            android:textColor="@color/text"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <ImageView

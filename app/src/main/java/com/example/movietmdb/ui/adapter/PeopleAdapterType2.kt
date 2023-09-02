@@ -44,7 +44,7 @@ class PeopleType2ViewHolder(private val binding : SingleListItem3Binding)
             .load(uri)
             .into(binding.imageView)
         binding.textView2.text = people.knownForDepartment
-        binding.imageView.setOnClickListener {
+        binding.type3ListItemLayout.setOnClickListener {
             onClick(people.id)
         }
     }

@@ -10,8 +10,9 @@ import com.bumptech.glide.Glide
 import com.example.movietmdb.R
 import com.example.movietmdb.data.model.content.Content
 import com.example.movietmdb.databinding.SingleListItem1Binding
+import com.example.movietmdb.databinding.SingleListItemAllBinding
 
-class ContentAdapterTypeAll(private val onClick : (id : Int) -> Unit) : PagingDataAdapter<Content,ContentAllViewHolder>(COMPARATOR){
+class SearchAdapterTypeAll(private val onClick : (id : Int) -> Unit) : PagingDataAdapter<Content,ContentAllViewHolder>(COMPARATOR){
     override fun onBindViewHolder(holder: ContentAllViewHolder, position: Int) {
         val item = getItem(position)
         if(item != null) {
@@ -21,19 +22,21 @@ class ContentAdapterTypeAll(private val onClick : (id : Int) -> Unit) : PagingDa
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContentAllViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = DataBindingUtil.inflate<SingleListItem1Binding>(inflater,R.layout.single_list_item1,parent,false)
+        val binding = DataBindingUtil.inflate<SingleListItemAllBinding>(inflater,R.layout.single_list_item_all,parent,false)
         return ContentAllViewHolder(binding)
     }
 }
-class ContentAllViewHolder(private  val binding : SingleListItem1Binding)
+class ContentAllViewHolder(private  val binding : SingleListItemAllBinding)
     : RecyclerView.ViewHolder(binding.root) {
     fun bind(content : Content,onClick: (id: Int) -> Unit) {
-        binding.title.text = content.title
+        var title = content.title
+        if(title == null) title = content.name
+        binding.title.text = title
         val uri = "https://image.tmdb.org/t/p/w500/" + content.posterPath
         Glide.with(binding.image.context)
             .load(uri)
             .into(binding.image)
-        binding.cardView.setOnClickListener {
+        binding.layout.setOnClickListener {
             onClick(content.id)
         }
     }

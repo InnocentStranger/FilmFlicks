@@ -86,6 +86,13 @@ interface ApiService {
 
     // --------------------------------------------------------------
 
+    @GET("/3/search/movie?")
+    suspend fun getMovieSearch(@Query("api_key") apiKey : String,@Query("page") page : Int,@Query("query") query : String) : Response<DiscoverContent>
 
+    @GET("/3/search/tv")
+    suspend fun getTvSeriesSearch(@Query("api_key") apiKey : String,@Query("page") page : Int,@Query("query") query : String) : Response<DiscoverContent>
+
+    @GET("/3/search/person?")
+    suspend fun getPersonSearch(@Query("api_key") apiKey : String,@Query("page") page : Int,@Query("query") query : String) : Response<DiscoverPeople>
 
 }
