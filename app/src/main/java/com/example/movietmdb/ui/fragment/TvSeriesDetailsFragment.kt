@@ -106,11 +106,12 @@ class TvSeriesDetailsFragment : Fragment() {
                 Glide.with(binding.image.context)
                     .load(uri)
                     .into(binding.image)
-
-                binding.title.text = it.body()!!.title
+                var title = it.body()?.title
+                if(title == null) title = it.body()?.name
+                binding.title.text = title
                 binding.description.text = it.body()!!.overview
                 binding.votes.text = it.body()!!.voteCount.toString()
-                binding.ratingBar.rating = it.body()!!.voteAverage.toFloat()
+                binding.ratingBar.rating = it.body()!!.voteAverage.toFloat()/2
 
                 genreAdapter.updateGenre(it.body()!!.genres)
                 genreAdapter.notifyDataSetChanged()
