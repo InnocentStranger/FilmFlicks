@@ -28,7 +28,6 @@ class SearchFragment : Fragment() {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 TODO("Not yet implemented")
 
-
                 return false
             }
 
