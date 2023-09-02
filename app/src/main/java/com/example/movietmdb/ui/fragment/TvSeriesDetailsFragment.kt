@@ -110,7 +110,7 @@ class TvSeriesDetailsFragment : Fragment() {
                 if(title == null) title = it.body()?.name
                 binding.title.text = title
                 binding.description.text = it.body()!!.overview
-                binding.votes.text = it.body()!!.voteCount.toString()
+                binding.votes.text = "(" + it.body()!!.voteCount.toString() + ")"
                 binding.ratingBar.rating = it.body()!!.voteAverage.toFloat()/2
 
                 genreAdapter.updateGenre(it.body()!!.genres)

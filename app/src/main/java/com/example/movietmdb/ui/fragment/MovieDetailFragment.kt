@@ -109,7 +109,7 @@ class MovieDetailFragment : Fragment() {
 
                 binding.title.text = it.body()!!.title
                 binding.description.text = it.body()!!.overview
-                binding.votes.text = it.body()!!.voteCount.toString()
+                binding.votes.text = "(" + it.body()!!.voteCount.toString() + ")"
                 binding.ratingBar.rating = it.body()!!.voteAverage.toFloat()/2
                 genreAdapter.updateGenre(it.body()!!.genres)
                 genreAdapter.notifyDataSetChanged()
