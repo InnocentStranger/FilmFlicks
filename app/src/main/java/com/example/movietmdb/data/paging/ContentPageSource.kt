@@ -11,7 +11,8 @@ class ContentPageSource(
     private val apiService: ApiService,
     private val apiKey : String,
     private val type : String,
-    private val id  : Int? = null
+    private val id  : Int? = null,
+    private val query : String? = null
 ) : PagingSource<Int, Any>() {
     override fun getRefreshKey(state: PagingState<Int, Any>): Int? {
         return state.anchorPosition?.let {
@@ -23,6 +24,11 @@ class ContentPageSource(
         var pages : Int? = null
         var  data : List<Any>? = null
         when(type) {
+            "search" -> {
+                val response = apiService.getMultiSearch(apiKey,position,query!!)
+                pages = response.body()?.totalPages
+                data = response.body()?.results
+            }
             "popular_movies" -> {
                 val response = apiService.getPopularMovies(apiKey,position);
                 pages = response.body()?.totalPages;

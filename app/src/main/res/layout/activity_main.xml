@@ -21,8 +21,8 @@
             android:layout_width="match_parent"
             app:labelVisibilityMode="labeled"
             android:layout_height="wrap_content"
-            app:itemIconTint="@color/rippleColor"
-            app:itemTextColor="@color/text"
+            app:itemIconTint="@color/navBarRipple"
+            app:itemTextColor="@color/navBarText"
             android:background="@color/navBarColor"
             app:menu="@menu/bottom_nav_menu"/>
 

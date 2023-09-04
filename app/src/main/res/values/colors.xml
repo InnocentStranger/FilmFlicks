@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="background">#1450A3</color>
-    <color name="text">#FFC436</color>
-<!--    <color name="rippleColor">#97D7DF</color>-->
-    <color name="rippleColor">#337CCF</color>
-<!--    <color name="text2">#CAC6C6</color>-->
-    <color name="navBarColor">#191D88</color>
-    <color name="statusBarColor">#191D88</color>
+    <color name="background">#526D82</color>
+    <color name="text">#DDE6ED</color>
+    <color name="navBarText">#DDE6ED</color>
+    <color name="rippleColor">#27374D</color>
+    <color name="navBarRipple">#526D82</color>
+    <color name="navBarColor">#27374D</color>
+    <color name="statusBarColor">#27374D</color>
 </resources>

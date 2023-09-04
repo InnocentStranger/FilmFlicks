@@ -36,6 +36,7 @@ class PeopleDetailFragment : Fragment() {
         val id = this.arguments?.getString("id")?.toInt()
         initRv()
         getData(id!!)
+        // button
         binding.backBtn.setOnClickListener {
             findNavController().popBackStack()
         }

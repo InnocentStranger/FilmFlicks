@@ -13,6 +13,7 @@ import com.example.movietmdb.data.model.people.DiscoverPeople
 import com.example.movietmdb.data.model.people.People
 import com.example.movietmdb.data.model.people.PeopleCredits
 import com.example.movietmdb.data.model.people.PeopleImages
+import com.example.movietmdb.data.model.search.Result
 import com.example.movietmdb.domain.Repository
 import com.example.pagingdemo.paging.ContentPageSource
 import retrofit2.Response
@@ -119,4 +120,9 @@ class RepositoryImp(private val apiService: ApiService, private val apiKey : Str
     override suspend fun getPeopleDetails(id: Int): Response<People> {
         return apiService.getPeopleDetails(id,apiKey)
     }
+
+    override fun getSearchResults(query: String): LiveData<PagingData<Result>> = Pager(
+        config = PagingConfig(pageSize = 20, maxSize = 60),
+        pagingSourceFactory = { ContentPageSource(apiService,apiKey,"search",null,query) }
+    ).liveData as LiveData<PagingData<Result>>
 }

@@ -98,11 +98,11 @@ class MovieDetailFragment : Fragment() {
     private fun getData(movieId : Int) {
         viewModel.getMovieDetails(movieId).observe(viewLifecycleOwner, Observer {
             if(it.isSuccessful && it.body() != null) {
-                val uri = "https://image.tmdb.org/t/p/w500/" + it.body()!!.posterPath
+                var uri = "https://image.tmdb.org/t/p/w500/" + it.body()!!.backdropPath
                 Glide.with(binding.backgroundImage.context)
                     .load(uri)
                     .into(binding.backgroundImage)
-
+                uri = "https://image.tmdb.org/t/p/w500/" + it.body()!!.posterPath
                 Glide.with(binding.image.context)
                     .load(uri)
                     .into(binding.image)

@@ -9,6 +9,7 @@ import com.example.movietmdb.data.model.people.DiscoverPeople
 import com.example.movietmdb.data.model.people.People
 import com.example.movietmdb.data.model.people.PeopleCredits
 import com.example.movietmdb.data.model.people.PeopleImages
+import com.example.movietmdb.data.model.search.Result
 import retrofit2.Response
 
 interface Repository {
@@ -23,8 +24,8 @@ interface Repository {
     suspend fun getContentFirstPage(type : String,id: Int?) : Response<DiscoverContent>
     suspend fun getPeopleFirstPage(type : String) : Response<DiscoverPeople>
     suspend fun getMovieDetails(id : Int) : Response<Content>
-
     suspend fun getTvSeriesDetails(id: Int) : Response<Content>
     suspend fun getPeopleDetails(id : Int) : Response<People>
+    fun getSearchResults(query: String) : LiveData<PagingData<Result>>
 
 }

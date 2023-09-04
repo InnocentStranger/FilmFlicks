@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -96,48 +95,48 @@ class TvSeriesDetailsFragment : Fragment() {
     }
 
     private fun getData(tvId : Int) {
-        viewModel.getTvSeriesDetails(tvId).observe(viewLifecycleOwner, Observer {
-            if(it.isSuccessful && it.body() != null) {
-                val uri = "https://image.tmdb.org/t/p/w500/" + it.body()!!.posterPath
+        viewModel.getTvSeriesDetails(tvId).observe(viewLifecycleOwner) {
+            if (it.isSuccessful && it.body() != null) {
+                var uri = "https://image.tmdb.org/t/p/w500/" + it.body()!!.backdropPath
                 Glide.with(binding.backgroundImage.context)
                     .load(uri)
                     .into(binding.backgroundImage)
-
+                uri = "https://image.tmdb.org/t/p/w500/" + it.body()!!.posterPath
                 Glide.with(binding.image.context)
                     .load(uri)
                     .into(binding.image)
                 var title = it.body()?.title
-                if(title == null) title = it.body()?.name
+                if (title == null) title = it.body()?.name
                 binding.title.text = title
                 binding.description.text = it.body()!!.overview
-                binding.votes.text = "(" + it.body()!!.voteCount.toString() + ")"
-                binding.ratingBar.rating = it.body()!!.voteAverage.toFloat()/2
+                binding.votes.text = "( ${it.body()!!.voteCount} )"
+                binding.ratingBar.rating = it.body()!!.voteAverage.toFloat() / 2
 
                 genreAdapter.updateGenre(it.body()!!.genres)
                 genreAdapter.notifyDataSetChanged()
             }
 
-        })
+        }
 
-        viewModel.getTvSeriesCast(tvId).observe(viewLifecycleOwner, Observer {
-            if(it.isSuccessful && it.body() != null) {
+        viewModel.getTvSeriesCast(tvId).observe(viewLifecycleOwner) {
+            if (it.isSuccessful && it.body() != null) {
                 castAdapter.updateData(it.body()!!.cast)
                 castAdapter.notifyDataSetChanged()
             }
-        })
+        }
 
-        viewModel.getSimilarTvSeriesFirstPage(tvId).observe(viewLifecycleOwner, Observer {
-            if(it.isSuccessful && it.body() != null) {
+        viewModel.getSimilarTvSeriesFirstPage(tvId).observe(viewLifecycleOwner) {
+            if (it.isSuccessful && it.body() != null) {
                 similarContentAdapter.updateData(it.body()!!.itemList)
                 similarContentAdapter.notifyDataSetChanged()
             }
-        })
+        }
 
-        viewModel.getRecommendedTvSeriesFirstPage(tvId).observe(viewLifecycleOwner, Observer {
-            if(it.isSuccessful && it.body() != null) {
+        viewModel.getRecommendedTvSeriesFirstPage(tvId).observe(viewLifecycleOwner) {
+            if (it.isSuccessful && it.body() != null) {
                 recommendedContentAdapter.updateData(it.body()!!.itemList)
                 recommendedContentAdapter.notifyDataSetChanged()
             }
-        })
+        }
     }
 }

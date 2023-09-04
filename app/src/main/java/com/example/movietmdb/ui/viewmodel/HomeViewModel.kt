@@ -1,7 +1,5 @@
 package com.example.movietmdb.ui.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
@@ -28,26 +26,20 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
     fun getTopRatedMoviesPaging(type : String) = repository.getMoviesPaging(type,null).cachedIn(viewModelScope)
     fun getNowPlayingMoviesPaging(type : String) = repository.getMoviesPaging(type,null).cachedIn(viewModelScope)
     fun getUpcomingMoviesPaging(type : String) = repository.getMoviesPaging(type,null).cachedIn(viewModelScope)
-
     fun getMovieDetails(id : Int) = liveData {
         emit(repository.getMovieDetails(id))
     }
-
     fun getMovieCast(id: Int) = liveData {
         emit(repository.getMovieCast(id))
     }
-
     fun getSimilarMovieFirstPage(id : Int) = liveData {
         emit(repository.getContentFirstPage("similar_movies",id))
     }
-
     fun getRecommendedMovieFirstPage(id : Int) = liveData {
         emit(repository.getContentFirstPage("recommended_movies",id))
     }
-
     fun getSimilarMoviePaging(type : String,id : Int?) = repository.getMoviesPaging(type,id).cachedIn(viewModelScope)
     fun getRecommendedMoviePaging(type : String, id : Int?) = repository.getMoviesPaging(type,id).cachedIn(viewModelScope)
-
     fun getSimilarTvSeriesPaging(type : String, id: Int?) = repository.getTvSeriesPaging(type,id).cachedIn(viewModelScope)
     fun getRecommendedTvSeriesPaging(type : String, id: Int?) = repository.getTvSeriesPaging(type,id).cachedIn(viewModelScope)
     fun getPeopleDetails(id : Int) = liveData {
@@ -107,4 +99,7 @@ class HomeViewModel(private val repository: Repository) : ViewModel() {
     }
     fun getPopularPeoplePaging(type : String,id : Int?) = repository.getPeoplePaging(type,id).cachedIn(viewModelScope)
     fun getTrendingPeoplePaging(type : String,id : Int?) = repository.getPeoplePaging(type,id).cachedIn(viewModelScope)
+
+    fun getSearchResult(query : String) = repository.getSearchResults(query).cachedIn(viewModelScope)
+
 }

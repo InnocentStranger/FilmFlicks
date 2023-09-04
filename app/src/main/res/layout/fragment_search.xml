@@ -6,7 +6,7 @@
 
    <LinearLayout
        android:layout_width="match_parent"
-       android:layout_height="wrap_content"
+       android:layout_height="match_parent"
        android:background="@color/background"
        android:orientation="vertical">
 
@@ -20,19 +20,12 @@
            app:queryBackground="@android:color/transparent"
            android:background="@drawable/edit_text_box"/>
 
-
-       <androidx.core.widget.NestedScrollView
+       <androidx.recyclerview.widget.RecyclerView
+           android:id="@+id/recyclerView"
            android:layout_width="match_parent"
-           android:layout_height="match_parent">
+           android:layout_height="match_parent"
+           android:layout_margin="12dp"/>
 
-           <androidx.recyclerview.widget.RecyclerView
-               android:id="@+id/recyclerView"
-
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:layout_margin="12dp"/>
-
-       </androidx.core.widget.NestedScrollView>
 
 
    </LinearLayout>

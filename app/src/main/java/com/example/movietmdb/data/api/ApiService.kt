@@ -7,6 +7,7 @@ import com.example.movietmdb.data.model.people.DiscoverPeople
 import com.example.movietmdb.data.model.people.People
 import com.example.movietmdb.data.model.people.PeopleCredits
 import com.example.movietmdb.data.model.people.PeopleImages
+import com.example.movietmdb.data.model.search.Search
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -94,5 +95,6 @@ interface ApiService {
 
     @GET("/3/search/person?")
     suspend fun getPersonSearch(@Query("api_key") apiKey : String,@Query("page") page : Int,@Query("query") query : String) : Response<DiscoverPeople>
-
+    @GET("/3/search/multi?")
+    suspend fun getMultiSearch(@Query("api_key") apiKey: String,@Query("page") page: Int, @Query("query") query : String) : Response<Search>
 }
